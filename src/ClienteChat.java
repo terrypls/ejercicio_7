@@ -18,13 +18,16 @@ public class ClienteChat implements Runnable {
                 String cmd = l.substring(0, 3);
                 System.out.println("comado: " + cmd);
                 String msg = l.substring(4);
-                if (cmd.equals("msg"))
-                    System.out.println("Mensaje: " + msg);
-                else if (cmd.equals("ref"))
-                    System.out.println("Nueva Lista: " + msg);
-                else if (cmd.equals("bye")) {
-                    System.out.println("Saliendo " + msg);
-                    return;
+                switch (cmd) {
+                    case "msg":
+                        System.out.println("Mensaje: " + msg);
+                        break;
+                    case "ref":
+                        System.out.println("Nueva Lista: " + msg);
+                        break;
+                    case "bye":
+                        System.out.println("Saliendo " + msg);
+                        return;
                 }
             }
         } catch (Exception e) {
@@ -33,7 +36,7 @@ public class ClienteChat implements Runnable {
     }
 
 
-    static public void main(String args[]) throws Exception {
+    static public void main(String[] args) throws Exception {
         s = new Socket(args[0], 4444);
         String myname = args[1];
         o = new PrintWriter(s.getOutputStream(), true);
