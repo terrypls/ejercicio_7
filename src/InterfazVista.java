@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 
 
@@ -13,10 +14,10 @@ public class InterfazVista extends Observable implements ActionListener {
     JTextArea lista = new JTextArea(40, 20);
     JButton logout = new JButton("Log out");
     JButton enviar = new JButton("Enviar");
-    String nombre;
 
-    InterfazVista(String name) {
-        this.nombre = name;
+
+    InterfazVista() {
+
         JFrame frame = new JFrame("Chat");
         frame.setSize(500, 560);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,16 +39,18 @@ public class InterfazVista extends Observable implements ActionListener {
 
 
         this.mensaje.setBounds(10, 50, 300, 400);
-        this.mensaje.setBackground(new Color(200, 200, 200));
+        this.mensaje.setBackground(new Color(240, 240, 240));
         this.mensaje.setLineWrap(true);
         this.mensaje.setEditable(false);
 
-        this.lista.setBounds(320,50,150,400);
+        this.lista.setBounds(320, 50, 150, 400);
         this.lista.setLineWrap(true);
+        this.lista.setEditable(false);
+        this.lista.setBackground(new Color(200, 200, 200));
         panel.add(this.lista);
 
         this.scrollPane.setBounds(10, 50, 300, 400);
-        this.scrollPane.setBackground(new Color(200, 200, 200));
+
 
         this.input.setBounds(10, 460, 380, 50);
         this.input.setLineWrap(true);
@@ -62,42 +65,40 @@ public class InterfazVista extends Observable implements ActionListener {
 
     }
 
-    public void usuariosConectados() {
-        int i = 0;
-        while (i != 10) {
-            this.mensaje.append("numero: " + i + "\n");
-            i++;
+    public void usuariosConectados(String[] lista) {
+        StringBuilder texto = new StringBuilder();
+        for (String nombre : lista
+        ) {
+
+            texto.append(nombre).append("\n");
         }
+        this.lista.setText(String.valueOf(texto));
     }
 
-    public void mensajesNuevo(){
-
+    public void mensajesNuevo(String mensaje) {
+        this.mensaje.append(mensaje + "\n");
     }
 
-
-    public static void main(String[] args) throws InterruptedException {
-        InterfazVista sv = new InterfazVista("myname");
-        Thread.sleep(2000);
-        sv.usuariosConectados();
-        Thread.sleep(2000);
-        sv.usuariosConectados();
-    }
-
-    public static void close(){
+    public static void close() {
         System.out.println("Cerrando Programa");
-
         System.exit(0);
+    }
+
+    public String inputText() {
+        return input.getText();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         String observer = "";
         if (e.getSource() == this.logout) {
             observer = "logout";
 
         }
         if (e.getSource() == this.enviar) {
-            observer = "enviar";
+            observer = this.inputText();
+            this.input.setText("");
         }
         setChanged();
         notifyObservers(observer);
