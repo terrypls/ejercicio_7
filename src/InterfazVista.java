@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Observable;
 
 
@@ -24,6 +23,7 @@ public class InterfazVista extends Observable implements ActionListener {
 
         JPanel panel = new JPanel();
         frame.add(panel);
+
         panel.setLayout(null);
         JLabel participantes = new JLabel("Conectados");
         participantes.setBounds(315, 0, 80, 50);
@@ -39,7 +39,7 @@ public class InterfazVista extends Observable implements ActionListener {
 
 
         this.mensaje.setBounds(10, 50, 300, 400);
-        this.mensaje.setBackground(new Color(240, 240, 240));
+        this.mensaje.setBackground(new Color(200, 200, 200));
         this.mensaje.setLineWrap(true);
         this.mensaje.setEditable(false);
 
@@ -50,9 +50,11 @@ public class InterfazVista extends Observable implements ActionListener {
         panel.add(this.lista);
 
         this.scrollPane.setBounds(10, 50, 300, 400);
+        this.scrollPane.setBackground(new Color(200, 200, 200));
 
 
         this.input.setBounds(10, 460, 380, 50);
+        this.input.setBorder(BorderFactory.createLineBorder(Color.black));
         this.input.setLineWrap(true);
         panel.add(this.input);
 
