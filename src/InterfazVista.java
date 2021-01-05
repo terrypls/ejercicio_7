@@ -39,7 +39,7 @@ public class InterfazVista extends Observable implements ActionListener {
 
 
         this.mensaje.setBounds(10, 50, 300, 400);
-        this.mensaje.setBackground(new Color(200, 200, 200));
+        this.mensaje.setBackground(new Color(220, 220, 220));
         this.mensaje.setLineWrap(true);
         this.mensaje.setEditable(false);
 
@@ -50,8 +50,6 @@ public class InterfazVista extends Observable implements ActionListener {
         panel.add(this.lista);
 
         this.scrollPane.setBounds(10, 50, 300, 400);
-        this.scrollPane.setBackground(new Color(200, 200, 200));
-
 
         this.input.setBounds(10, 460, 380, 50);
         this.input.setBorder(BorderFactory.createLineBorder(Color.black));
